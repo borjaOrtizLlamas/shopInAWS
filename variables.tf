@@ -8,6 +8,8 @@ variable "TERRAFORM_USER_PASS" {
 variable "ZONE_SUB" {
   default = "eu-west-1b"
 }
+variable "MONGO_SSH_KEY" {
+}
 
 #our provider
 provider "aws" {
