@@ -11,6 +11,14 @@ variable "ZONE_SUB" {
 variable "MONGO_SSH_KEY" {
 }
 
+variable "SUBNET_CIDR_BLOCK" {
+}
+
+variable "NET_CIDR_BLOCK" {
+}
+variable "SUFIX" {
+}
+
 #our provider
 provider "aws" {
   region     = "${var.ZONE}"
