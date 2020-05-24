@@ -2,7 +2,7 @@ resource "aws_instance" "mongoDB_des" {
   ami = "ami-0bbb90fb58907eeb3" #This ami is generated with packer, the code is in this repository: https://github.com/borjaOrtizLlamas/jenkinsAMI.git
   instance_type = "t2.micro"
   availability_zone = "${var.ZONE_SUB}"
-  key_name = "${aws_key_pair.mongoSSH.key_name}"
+  key_name = "mongoSHH"
   network_interface {
     network_interface_id = "${aws_network_interface.mongo_interface.id}"
     device_index = 0
@@ -25,7 +25,3 @@ resource "aws_network_interface" "mongo_interface" {
     }
 }
 
-resource "aws_key_pair" "mongoSSH" {
-  key_name   = "mongoSSH"
-  public_key = "${var.MONGO_SSH_KEY}"
-}
