@@ -14,9 +14,14 @@ variable "MONGO_SSH_KEY" {
 variable "SUBNET_CIDR_APLICATIONS" {
 }
 
-variable "SUBNET_CIDR_CLUSTER" {
+variable "SUBNET_CIDR_CLUSTER_1" {
 }
-
+variable "SUBNET_CIDR_CLUSTER_2" {
+}
+variable "ZONE_SUB_CLUSTER_1" {
+}
+variable "ZONE_SUB_CLUSTER_2" {
+}
 variable "NET_CIDR_BLOCK" {
 }
 variable "SUFIX" {

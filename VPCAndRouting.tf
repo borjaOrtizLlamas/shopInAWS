@@ -31,17 +31,30 @@ resource "aws_subnet" "unir_subnet_aplications" {
   }
 }
 
-resource "aws_subnet" "unir_subnet_cluster" {
+resource "aws_subnet" "unir_subnet_cluster_1" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
-  cidr_block = "${var.SUBNET_CIDR_CLUSTER}"
-  availability_zone = "${var.ZONE_SUB}"
+  cidr_block = "${var.SUBNET_CIDR_CLUSTER_1}"
+  availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
-    Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}"
+    Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-1"
     Environment = "${var.SUFIX}"
   }
 }
+
+resource "aws_subnet" "unir_subnet_cluster_2" {
+  vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
+  cidr_block = "${var.SUBNET_CIDR_CLUSTER_2}"
+  availability_zone = "${var.ZONE_SUB_CLUSTER_2}"
+  depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
+  map_public_ip_on_launch = true
+  tags = {
+    Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-2"
+    Environment = "${var.SUFIX}"
+  }
+}
+
 
 
 resource "aws_internet_gateway" "unir_gat_shop_dev" {

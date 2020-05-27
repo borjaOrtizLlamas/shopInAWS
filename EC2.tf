@@ -24,4 +24,3 @@ resource "aws_network_interface" "mongo_interface" {
         Environment = "${var.SUFIX}"
     }
 }
-
