@@ -11,7 +11,10 @@ variable "ZONE_SUB" {
 variable "MONGO_SSH_KEY" {
 }
 
-variable "SUBNET_CIDR_BLOCK" {
+variable "SUBNET_CIDR_APLICATIONS" {
+}
+
+variable "SUBNET_CIDR_CLUSTER" {
 }
 
 variable "NET_CIDR_BLOCK" {

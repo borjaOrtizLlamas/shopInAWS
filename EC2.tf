@@ -17,7 +17,7 @@ resource "aws_instance" "mongoDB_des" {
 }
 
 resource "aws_network_interface" "mongo_interface" {
-    subnet_id   = "${aws_subnet.unir_subnet_shop_dev.id}"
+    subnet_id   = "${aws_subnet.unir_subnet_aplications.id}"
     security_groups = ["${aws_security_group.mongo_access.id}"]
     tags = {
         Name = "unir_mongo_interface-${var.SUFIX}"
