@@ -46,7 +46,7 @@ resource "aws_security_group_rule" "mongo_ingress" {
 }
 
 # Setup for IAM role needed to setup an EKS cluster
-resource "aws_iam_role" "eks_cluster" {
+resource "aws_iam_role" "eks_cluster_role" {
   name = "eks-cluster"
 
   assume_role_policy = <<POLICY
@@ -67,10 +67,10 @@ POLICY
 
 resource "aws_iam_role_policy_attachment" "AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = "${aws_iam_role.eks_cluster.name}"
+  role       = "${aws_iam_role.eks_cluster_role.name}"
 }
 
 resource "aws_iam_role_policy_attachment" "AmazonEKSServicePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
-  role       = "${aws_iam_role.eks_cluster.name}"
+  role       = "${aws_iam_role.eks_cluster_role.name}"
 }
