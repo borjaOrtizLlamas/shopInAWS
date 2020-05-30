@@ -1,5 +1,5 @@
 resource "aws_eks_cluster" "CLUSTER" {
-  name     = "UNIR-API-REST-CLUSTER"
+  name     = "UNIR-API-REST-CLUSTER-${var.SUFIX}"
   role_arn = "${aws_iam_role.eks_cluster_role.arn}"
 
   vpc_config {
