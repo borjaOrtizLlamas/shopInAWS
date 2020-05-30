@@ -55,6 +55,65 @@ resource "aws_subnet" "unir_subnet_cluster_2" {
   }
 }
 
+resource "aws_subnet" "unir_subnet_cluster_3" {
+  vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
+  cidr_block = "${var.SUBNET_CIDR_CLUSTER_3}"
+  availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
+  depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
+  map_public_ip_on_launch = true
+  tags = {
+    Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-3"
+    Environment = "${var.SUFIX}"
+  }
+}
+
+resource "aws_subnet" "unir_subnet_cluster_4" {
+  vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
+  cidr_block = "${var.SUBNET_CIDR_CLUSTER_4}"
+  availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
+  depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
+  map_public_ip_on_launch = true
+  tags = {
+    Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-4"
+    Environment = "${var.SUFIX}"
+  }
+}
+
+resource "aws_subnet" "unir_subnet_cluster_5" {
+  vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
+  cidr_block = "${var.SUBNET_CIDR_CLUSTER_5}"
+  availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
+  depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
+  map_public_ip_on_launch = true
+  tags = {
+    Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-5"
+    Environment = "${var.SUFIX}"
+  }
+}
+
+resource "aws_subnet" "unir_subnet_cluster_6" {
+  vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
+  cidr_block = "${var.SUBNET_CIDR_CLUSTER_6}"
+  availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
+  depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
+  map_public_ip_on_launch = true
+  tags = {
+    Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-6"
+    Environment = "${var.SUFIX}"
+  }
+}
+
+resource "aws_subnet" "unir_subnet_cluster_7" {
+  vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
+  cidr_block = "${var.SUBNET_CIDR_CLUSTER_7}"
+  availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
+  depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
+  map_public_ip_on_launch = true
+  tags = {
+    Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-7"
+    Environment = "${var.SUFIX}"
+  }
+}
 
 
 resource "aws_internet_gateway" "unir_gat_shop_dev" {
