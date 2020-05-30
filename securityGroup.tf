@@ -49,20 +49,21 @@ resource "aws_security_group_rule" "mongo_ingress" {
 resource "aws_iam_role" "cluster-role" {
   name = "UNIR_CLUSTER_ROLE"
  
-  assume_role_policy = <<POLICY
-  {
+  assume_role_policy =  <<EOF
+{
     "Version": "2012-10-17",
     "Statement": [
     {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "eks.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
+        "Action": "sts:AssumeRole",
+        "Principal": {
+        "Service": "ec2.amazonaws.com"
+        },
+        "Effect": "Allow",
+        "Sid": ""
     }
-  ]
+    ]
 }
-POLICY
+EOF
 }
  
 resource "aws_iam_role_policy_attachment" "tf-cluster-AmazonEKSServiceRolePolicy" {
