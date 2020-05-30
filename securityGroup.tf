@@ -96,8 +96,6 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSServicePolicy" {
   role       = "${aws_iam_role.eks_cluster_role.name}"
 }
 
-
-
 resource "aws_iam_role_policy_attachment" "AmazonEKSWorkerNodePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = "${aws_iam_role.eks_nodes_role.name}"
