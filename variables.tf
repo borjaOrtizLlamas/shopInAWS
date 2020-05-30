@@ -22,6 +22,17 @@ variable "ZONE_SUB_CLUSTER_1" {
 }
 variable "ZONE_SUB_CLUSTER_2" {
 }
+variable "ZONE_SUB_CLUSTER_3" {
+}
+variable "ZONE_SUB_CLUSTER_4" {
+}
+variable "ZONE_SUB_CLUSTER_5" {
+}
+variable "ZONE_SUB_CLUSTER_6" {
+}
+variable "ZONE_SUB_CLUSTER_7" {
+}
+
 variable "NET_CIDR_BLOCK" {
 }
 variable "SUFIX" {
