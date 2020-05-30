@@ -5,6 +5,10 @@ resource "aws_eks_cluster" "CLUSTER" {
   vpc_config {
     subnet_ids = ["${aws_subnet.unir_subnet_cluster_2.id}", "${aws_subnet.unir_subnet_cluster_1.id}"]
   }
+
+  depends_on = [
+    "aws_iam_role_policy_attachment.tf-cluster-AmazonEKSServiceRolePolicy"
+  ]
 }
 
 output "endpoint" {
