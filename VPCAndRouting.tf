@@ -19,6 +19,9 @@ resource "aws_route_table" "route" {
   }
 }
 
+data "aws_availability_zones" "available" {
+  state = "available"
+}
 resource "aws_subnet" "unir_subnet_aplications" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_APLICATIONS}"
@@ -34,7 +37,7 @@ resource "aws_subnet" "unir_subnet_aplications" {
 resource "aws_subnet" "unir_subnet_cluster_1" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_CLUSTER_1}"
-  availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
+  availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
@@ -46,7 +49,7 @@ resource "aws_subnet" "unir_subnet_cluster_1" {
 resource "aws_subnet" "unir_subnet_cluster_2" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_CLUSTER_2}"
-  availability_zone = "${var.ZONE_SUB_CLUSTER_2}"
+  availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
@@ -58,19 +61,18 @@ resource "aws_subnet" "unir_subnet_cluster_2" {
 resource "aws_subnet" "unir_subnet_cluster_3" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_CLUSTER_3}"
-  availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
+  availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
     "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
-
   }
 }
 
 resource "aws_subnet" "unir_subnet_cluster_4" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_CLUSTER_4}"
-  availability_zone = "${var.ZONE_SUB_CLUSTER_2}"
+  availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
@@ -82,7 +84,7 @@ resource "aws_subnet" "unir_subnet_cluster_4" {
 resource "aws_subnet" "unir_subnet_cluster_5" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_CLUSTER_5}"
-  availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
+  availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
@@ -93,7 +95,7 @@ resource "aws_subnet" "unir_subnet_cluster_5" {
 resource "aws_subnet" "unir_subnet_cluster_6" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_CLUSTER_6}"
-  availability_zone = "${var.ZONE_SUB_CLUSTER_2}"
+  availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
