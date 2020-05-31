@@ -37,9 +37,9 @@ resource "aws_subnet" "unir_subnet_aplications" {
 resource "aws_subnet" "unir_subnet_cluster_1" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_CLUSTER_1}"
-  availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
+  availability_zone = "${var.ZONE_SUB_CLUSTER_2}"
   tags = {
-    "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
+    "kubernetes.io/cluster/UNIR-API-REST-CLUSTER-${var.SUFIX}" = "shared"
 
   }
 }
@@ -47,9 +47,9 @@ resource "aws_subnet" "unir_subnet_cluster_1" {
 resource "aws_subnet" "unir_subnet_cluster_2" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_CLUSTER_2}"
-  availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
+  availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
   tags = {
-    "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
+    "kubernetes.io/cluster/UNIR-API-REST-CLUSTER-${var.SUFIX}" = "shared"
 
   }
 }
