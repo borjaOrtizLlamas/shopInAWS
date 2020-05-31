@@ -40,6 +40,8 @@ resource "aws_subnet" "unir_subnet_cluster_1" {
   tags = {
     Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-1"
     Environment = "${var.SUFIX}"
+    "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
+
   }
 }
 
@@ -52,6 +54,8 @@ resource "aws_subnet" "unir_subnet_cluster_2" {
   tags = {
     Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-2"
     Environment = "${var.SUFIX}"
+    "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
+
   }
 }
 
@@ -64,6 +68,8 @@ resource "aws_subnet" "unir_subnet_cluster_3" {
   tags = {
     Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-3"
     Environment = "${var.SUFIX}"
+    "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
+
   }
 }
 
@@ -76,6 +82,8 @@ resource "aws_subnet" "unir_subnet_cluster_4" {
   tags = {
     Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-4"
     Environment = "${var.SUFIX}"
+    "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
+
   }
 }
 
@@ -88,6 +96,7 @@ resource "aws_subnet" "unir_subnet_cluster_5" {
   tags = {
     Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-5"
     Environment = "${var.SUFIX}"
+    "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
   }
 }
 
@@ -100,6 +109,8 @@ resource "aws_subnet" "unir_subnet_cluster_6" {
   tags = {
     Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-6"
     Environment = "${var.SUFIX}"
+    "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
+
   }
 }
 
