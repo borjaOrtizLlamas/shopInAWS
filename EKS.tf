@@ -1,7 +1,6 @@
 resource "aws_eks_cluster" "CLUSTER" {
   name     = "UNIR-API-REST-CLUSTER-${var.SUFIX}"
   role_arn = "${aws_iam_role.eks_cluster_role.arn}"
-#
   vpc_config {
     subnet_ids = [
       "${aws_subnet.unir_subnet_cluster_1.id}","${aws_subnet.unir_subnet_cluster_2.id}"
@@ -22,10 +21,10 @@ resource "aws_eks_node_group" "nodes" {
   subnet_ids      = [
       "${aws_subnet.unir_subnet_cluster_1.id}","${aws_subnet.unir_subnet_cluster_2.id}"
   ]
-
+  ec2_ssh_key =  "${aws_key_pair.clusters.key_name}"
   scaling_config {
-    desired_size = 1
-    max_size     = 1
+    desired_size = 2
+    max_size     = 3
     min_size     = 1
   }
 

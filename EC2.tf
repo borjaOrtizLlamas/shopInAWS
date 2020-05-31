@@ -24,14 +24,3 @@ resource "aws_network_interface" "mongo_interface" {
         Environment = "${var.SUFIX}"
     }
 }
-
-
-resource "aws_key_pair" "mongoSSH" {
-  key_name   = "mongoSHH-${var.SUFIX}"
-  public_key = "${var.MONGO_SSH_KEY}"
-}
-
-resource "aws_key_pair" "kibanaSSH" {
-  key_name   = "kibanaSSH-${var.SUFIX}"
-  public_key = "${var.KIBANA_SSH_KEY}"
-}

@@ -110,3 +110,19 @@ resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = "${aws_iam_role.eks_nodes_role.name}"
 }
+
+
+resource "aws_key_pair" "mongoSSH" {
+  key_name   = "mongoSHH-${var.SUFIX}"
+  public_key = "${var.MONGO_SSH_KEY}"
+}
+
+resource "aws_key_pair" "kibanaSSH" {
+  key_name   = "kibanaSSH-${var.SUFIX}"
+  public_key = "${var.KIBANA_SSH_KEY}"
+}
+
+resource "aws_key_pair" "clusters" {
+  key_name   = "clusters-${var.SUFIX}"
+  public_key = "${var.KIBANA_SSH_KEY}"
+}
