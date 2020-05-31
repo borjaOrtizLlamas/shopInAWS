@@ -11,6 +11,9 @@ variable "ZONE_SUB" {
 variable "MONGO_SSH_KEY" {
 }
 
+variable "KIBANA_SSH_KEY" {
+}
+
 variable "SUBNET_CIDR_APLICATIONS" {
 }
 

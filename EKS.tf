@@ -4,10 +4,7 @@ resource "aws_eks_cluster" "CLUSTER" {
 
   vpc_config {
     subnet_ids = [
-      "${aws_subnet.unir_subnet_cluster_1.id}","${aws_subnet.unir_subnet_cluster_2.id}",
-      "${aws_subnet.unir_subnet_cluster_3.id}","${aws_subnet.unir_subnet_cluster_4.id}",
-      "${aws_subnet.unir_subnet_cluster_5.id}","${aws_subnet.unir_subnet_cluster_6.id}"
-
+      "${aws_subnet.unir_subnet_cluster_1.id}","${aws_subnet.unir_subnet_cluster_2.id}"
     ]
   }
   depends_on = [
@@ -23,8 +20,7 @@ resource "aws_eks_node_group" "nodes" {
   node_group_name = "node_sping_boot"
   node_role_arn   = "${aws_iam_role.eks_nodes_role.arn}"
   subnet_ids      = [
-    "${aws_subnet.unir_subnet_cluster_4.id}",
-    "${aws_subnet.unir_subnet_cluster_5.id}",      
+      "${aws_subnet.unir_subnet_cluster_1.id}","${aws_subnet.unir_subnet_cluster_2.id}"
   ]
 
   scaling_config {
