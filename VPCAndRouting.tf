@@ -38,8 +38,6 @@ resource "aws_subnet" "unir_subnet_cluster_1" {
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
-    "Name" = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-1"
-    "Environment" = "${var.SUFIX}"
     "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
 
   }
@@ -52,8 +50,6 @@ resource "aws_subnet" "unir_subnet_cluster_2" {
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
-    "Name" = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-2"
-    "Environment" = "${var.SUFIX}"
     "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
 
   }
@@ -66,8 +62,6 @@ resource "aws_subnet" "unir_subnet_cluster_3" {
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
-    "Name" = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-3"
-    "Environment" = "${var.SUFIX}"
     "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
 
   }
@@ -80,8 +74,6 @@ resource "aws_subnet" "unir_subnet_cluster_4" {
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
-    "Name" = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-4"
-    "Environment" = "${var.SUFIX}"
     "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
 
   }
@@ -94,8 +86,6 @@ resource "aws_subnet" "unir_subnet_cluster_5" {
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
-    "Name" = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-5"
-    "Environment" = "${var.SUFIX}"
     "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
   }
 }
@@ -107,8 +97,6 @@ resource "aws_subnet" "unir_subnet_cluster_6" {
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
-    "Name" = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-6"
-    "Environment" = "${var.SUFIX}"
     "kubernetes.io/cluster/${aws_eks_cluster.CLUSTER.name}" = "shared"
   }
 }
