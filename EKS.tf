@@ -42,9 +42,10 @@ resource "aws_eks_node_group" "nodes" {
   ]
 }
 
-output "endpoint" {
+output "eks_cluster_endpoint" {
   value = "${aws_eks_cluster.CLUSTER.endpoint}"
 }
-output "kubeconfig-certificate-authority-data" {
-  value = "${aws_eks_cluster.CLUSTER.certificate_authority.0.data}"
+
+output "eks_cluster_certificat_authority" {
+    value = "${aws_eks_cluster.CLUSTER.certificate_authority}"
 }
