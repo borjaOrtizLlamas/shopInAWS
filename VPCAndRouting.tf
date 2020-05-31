@@ -103,19 +103,6 @@ resource "aws_subnet" "unir_subnet_cluster_6" {
   }
 }
 
-resource "aws_subnet" "unir_subnet_cluster_7" {
-  vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
-  cidr_block = "${var.SUBNET_CIDR_CLUSTER_7}"
-  availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
-  depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
-  map_public_ip_on_launch = true
-  tags = {
-    Name = "UNIR-SUBNET-CLUSTER-${var.SUFIX}-cluster-7"
-    Environment = "${var.SUFIX}"
-  }
-}
-
-
 resource "aws_internet_gateway" "unir_gat_shop_dev" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   tags = {

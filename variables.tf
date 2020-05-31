@@ -26,8 +26,6 @@ variable "SUBNET_CIDR_CLUSTER_5" {
 }
 variable "SUBNET_CIDR_CLUSTER_6" {
 }
-variable "SUBNET_CIDR_CLUSTER_7" {
-}
 
 variable "ZONE_SUB_CLUSTER_1" {
 }
