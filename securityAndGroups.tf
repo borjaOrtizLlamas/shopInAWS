@@ -124,5 +124,5 @@ resource "aws_key_pair" "kibanaSSH" {
 
 resource "aws_key_pair" "clusters" {
   key_name   = "clusters-${var.SUFIX}"
-  public_key = "${var.KIBANA_SSH_KEY}"
+  public_key = "${var.CLUSTER_SSH_KEY}"
 }
