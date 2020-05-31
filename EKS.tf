@@ -14,29 +14,27 @@ resource "aws_eks_cluster" "CLUSTER" {
 }
 
 
-resource "aws_eks_node_group" "nodes" {
-  cluster_name    = "${aws_eks_cluster.CLUSTER.name}"
-  node_group_name = "node_sping_boot"
-  node_role_arn   = "${aws_iam_role.eks_nodes_role.arn}"
-  subnet_ids      = [
-      "${aws_subnet.unir_subnet_cluster_1.id}","${aws_subnet.unir_subnet_cluster_2.id}"
-  ]
-  ec2_ssh_key =  "${aws_key_pair.clusters.key_name}"
-  scaling_config {
-    desired_size = 2
-    max_size     = 3
-    min_size     = 1
-  }
-
+#resource "aws_eks_node_group" "nodes" {
+#  cluster_name    = "${aws_eks_cluster.CLUSTER.name}"
+#  node_group_name = "node_sping_boot"
+#  node_role_arn   = "${aws_iam_role.eks_nodes_role.arn}"
+#  subnet_ids      = [
+#      "${aws_subnet.unir_subnet_cluster_1.id}","${aws_subnet.unir_subnet_cluster_2.id}"
+#  ]
+#  scaling_config {
+#    desired_size = 2
+#    max_size     = 3
+#    min_size     = 1
+#  }
+#
 # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
 # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
-  depends_on = [
-    "aws_key_pair.clusters",
-    "aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy",
-    "aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy",
-    "aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly",
-  ]
-}
+#  depends_on = [
+#    "aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy",
+#    "aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy",
+#    "aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly",
+#  ]
+#}
 
 output "eks_cluster_endpoint" {
   value = "${aws_eks_cluster.CLUSTER.endpoint}"
