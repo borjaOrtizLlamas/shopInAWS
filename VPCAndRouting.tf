@@ -70,7 +70,7 @@ resource "aws_subnet" "unir_subnet_cluster_3" {
 resource "aws_subnet" "unir_subnet_cluster_4" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_CLUSTER_4}"
-  availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
+  availability_zone = "${var.ZONE_SUB_CLUSTER_2}"
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
@@ -94,7 +94,7 @@ resource "aws_subnet" "unir_subnet_cluster_5" {
 resource "aws_subnet" "unir_subnet_cluster_6" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_CLUSTER_6}"
-  availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
+  availability_zone = "${var.ZONE_SUB_CLUSTER_2}"
   depends_on = ["aws_internet_gateway.unir_gat_shop_dev"]
   map_public_ip_on_launch = true
   tags = {
