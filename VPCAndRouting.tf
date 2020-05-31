@@ -41,7 +41,6 @@ resource "aws_subnet" "unir_subnet_cluster_1" {
   availability_zone = "${var.ZONE_SUB_CLUSTER_2}"
   tags = {
     "kubernetes.io/cluster/UNIR-API-REST-CLUSTER-${var.SUFIX}" = "shared"
-
   }
 }
 
