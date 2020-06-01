@@ -18,10 +18,6 @@ resource "aws_route_table" "route" {
     Environment = "${var.SUFIX}"
   }
 }
-
-data "aws_availability_zones" "available" {
-  state = "available"
-}
 resource "aws_subnet" "unir_subnet_aplications" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_APLICATIONS}"
@@ -56,7 +52,7 @@ resource "aws_subnet" "unir_subnet_cluster_2" {
   depends_on = ["aws_internet_gateway.unir_gat_shop"]
   tags = {
     "kubernetes.io/cluster/UNIR-API-REST-CLUSTER-${var.SUFIX}" = "shared"
-    Name = "UNIR-SUBNET-CLUSTER-1-${var.SUFIX}"
+    Name = "UNIR-SUBNET-CLUSTER-2-${var.SUFIX}"
     Environment = "${var.SUFIX}"
   }
 
@@ -66,7 +62,7 @@ resource "aws_internet_gateway" "unir_gat_shop" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   tags = {
     Environment = "${var.SUFIX}"
-    Name = "UNIR-publicGateway-${var.SUFIX}"
+    Name = "UNIR-publicGateway-SHOP-VPC-${var.SUFIX}"
   }
 }
 
