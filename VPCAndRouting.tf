@@ -33,9 +33,7 @@ resource "aws_subnet" "unir_subnet_aplications" {
 resource "aws_subnet" "unir_subnet_cluster_1" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_CLUSTER_1}"
-  map_public_ip_on_launch = true
   availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
-  depends_on = ["aws_internet_gateway.unir_gat_shop"]
   tags = {
     "kubernetes.io/cluster/UNIR-API-REST-CLUSTER-${var.SUFIX}" = "shared"
     Name = "UNIR-SUBNET-CLUSTER-1-${var.SUFIX}"
@@ -48,8 +46,6 @@ resource "aws_subnet" "unir_subnet_cluster_2" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_CLUSTER_2}"
   availability_zone = "${var.ZONE_SUB_CLUSTER_2}"
-  map_public_ip_on_launch = true
-  depends_on = ["aws_internet_gateway.unir_gat_shop"]
   tags = {
     "kubernetes.io/cluster/UNIR-API-REST-CLUSTER-${var.SUFIX}" = "shared"
     Name = "UNIR-SUBNET-CLUSTER-2-${var.SUFIX}"
@@ -66,15 +62,15 @@ resource "aws_internet_gateway" "unir_gat_shop" {
   }
 }
 
-resource "aws_route_table_association" "association-cluster-1" {
-  subnet_id      = "${aws_subnet.unir_subnet_cluster_1.id}"
-  route_table_id = "${aws_route_table.route.id}"
-}
+#resource "aws_route_table_association" "association-cluster-1" {
+#  subnet_id      = "${aws_subnet.unir_subnet_cluster_1.id}"
+#  route_table_id = "${aws_route_table.route.id}"
+#}
 
-resource "aws_route_table_association" "association-cluster-2" {
-  subnet_id      = "${aws_subnet.unir_subnet_cluster_2.id}"
-  route_table_id = "${aws_route_table.route.id}"
-}
+#resource "aws_route_table_association" "association-cluster-2" {
+#  subnet_id      = "${aws_subnet.unir_subnet_cluster_2.id}"
+#  route_table_id = "${aws_route_table.route.id}"
+#}
 
 resource "aws_route_table_association" "unir_subnet_aplications" {
   subnet_id      = "${aws_subnet.unir_subnet_aplications.id}"
