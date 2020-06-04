@@ -34,6 +34,7 @@ resource "aws_subnet" "unir_subnet_cluster_1" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_CLUSTER_1}"
   availability_zone = "${var.ZONE_SUB_CLUSTER_1}"
+  map_public_ip_on_launch = true
   tags = {
     "kubernetes.io/cluster/UNIR-API-REST-CLUSTER-${var.SUFIX}" = "shared"
     Name = "UNIR-SUBNET-CLUSTER-1-${var.SUFIX}"
@@ -46,6 +47,7 @@ resource "aws_subnet" "unir_subnet_cluster_2" {
   vpc_id = "${aws_vpc.unir_shop_vpc_dev.id}"
   cidr_block = "${var.SUBNET_CIDR_CLUSTER_2}"
   availability_zone = "${var.ZONE_SUB_CLUSTER_2}"
+  map_public_ip_on_launch = true
   tags = {
     "kubernetes.io/cluster/UNIR-API-REST-CLUSTER-${var.SUFIX}" = "shared"
     Name = "UNIR-SUBNET-CLUSTER-2-${var.SUFIX}"
