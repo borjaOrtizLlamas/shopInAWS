@@ -62,15 +62,15 @@ resource "aws_internet_gateway" "unir_gat_shop" {
   }
 }
 
-#resource "aws_route_table_association" "association-cluster-1" {
-#  subnet_id      = "${aws_subnet.unir_subnet_cluster_1.id}"
-#  route_table_id = "${aws_route_table.route.id}"
-#}
+resource "aws_route_table_association" "association-cluster-1" {
+  subnet_id      = "${aws_subnet.unir_subnet_cluster_1.id}"
+  route_table_id = "${aws_route_table.route.id}"
+}
 
-#resource "aws_route_table_association" "association-cluster-2" {
-#  subnet_id      = "${aws_subnet.unir_subnet_cluster_2.id}"
-#  route_table_id = "${aws_route_table.route.id}"
-#}
+resource "aws_route_table_association" "association-cluster-2" {
+  subnet_id      = "${aws_subnet.unir_subnet_cluster_2.id}"
+  route_table_id = "${aws_route_table.route.id}"
+}
 
 resource "aws_route_table_association" "unir_subnet_aplications" {
   subnet_id      = "${aws_subnet.unir_subnet_aplications.id}"
