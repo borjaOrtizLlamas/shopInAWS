@@ -35,7 +35,7 @@ resource "aws_security_group_rule" "api_rest_ingress" {
 }
 
 
-resource "aws_security_group_rule" "get_container" {
+resource "aws_security_group_rule" "get_container_egress" {
   type              = "egress"
   from_port         = 80
   to_port           = 80
@@ -44,7 +44,7 @@ resource "aws_security_group_rule" "get_container" {
   security_group_id = "${aws_security_group.api_rest_group.id}"
 }
 
-resource "aws_security_group_rule" "get_container2" {
+resource "aws_security_group_rule" "get_container_ingress" {
   type              = "ingress"
   from_port         = 80
   to_port           = 80
@@ -52,6 +52,27 @@ resource "aws_security_group_rule" "get_container2" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = "${aws_security_group.api_rest_group.id}"
 }
+
+resource "aws_security_group_rule" "get_container_https_egress" {
+  type              = "egress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.api_rest_group.id}"
+}
+
+resource "aws_security_group_rule" "get_container_https_ingress" {
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.api_rest_group.id}"
+}
+
+
+
 
 
 resource "aws_security_group_rule" "mongo_outbound" {
