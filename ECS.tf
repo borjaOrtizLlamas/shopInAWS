@@ -49,5 +49,5 @@ resource "aws_ecs_task_definition" "APIRestSmallCompany" {
   requires_compatibilities = ["FARGATE"]
   memory = 2048
   cpu = 1024
-  network_mode= awsvpc
+  network_mode= "awsvpc"
 }
