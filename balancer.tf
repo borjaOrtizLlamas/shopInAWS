@@ -21,7 +21,7 @@ resource "aws_lb_target_group" "targetForService" {
   }
 }
 #resource "aws_lb_target_group_attachment" "attachment" {
-#  target_group_arn = "${aws_lb_target_group.targetForService.arn}"
+#  target_group_arn = ""
 #  target_id        = "${aws_ecs_service.service_for_api.id}"
 #  port             = 8080
 #}
@@ -31,6 +31,6 @@ resource "aws_lb_listener" "front_end" {
   protocol          = "HTTP"
   default_action {
     type             = "forward"
-    target_group_arn = "${aws_ecs_service.service_for_api.arn}"
+    target_group_arn = "${aws_lb_target_group.targetForService.arn}"
   }
 }
