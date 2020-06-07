@@ -70,7 +70,7 @@ resource "aws_ecs_service" "service_for_api" {
   network_configuration = {
     subnets: ["${aws_subnet.unir_subnet_cluster_1}",
     "${aws_subnet.unir_subnet_cluster_2}"]
-    security_groups = ["${aws_security_group.api_rest_group}"]
+    security_groups = ["${aws_security_group.api_rest_group.id}"]
 
   }
 }
