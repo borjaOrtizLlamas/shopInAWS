@@ -14,7 +14,8 @@ resource "aws_lb_target_group" "targetForService" {
   port     = 8080
   protocol = "HTTP"
   vpc_id   = "${aws_vpc.unir_shop_vpc_dev.id}"
-    tags = {
+  target_type = "ip"
+  tags = {
     Name = "targetForService-${var.SUFIX}"
     Environment = "${var.SUFIX}"
   }
