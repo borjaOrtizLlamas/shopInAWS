@@ -74,4 +74,9 @@ resource "aws_ecs_service" "service_for_api" {
     security_groups = ["${aws_security_group.api_rest_group.id}"]
     assign_public_ip = true
   }
+  load_balancer {
+    target_group_arn = "${aws_lb_target_group.targetForService.arn}"
+    container_name   = "smallComerceApiRest"
+    container_port   = 8080
+  }
 }
