@@ -35,6 +35,24 @@ resource "aws_security_group_rule" "api_rest_ingress" {
 }
 
 
+resource "aws_security_group_rule" "get_container" {
+  type              = "egress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.api_rest_group.id}"
+}
+
+resource "aws_security_group_rule" "get_container2" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.api_rest_group.id}"
+}
+
 
 resource "aws_security_group_rule" "mongo_outbound" {
   type              = "egress"
