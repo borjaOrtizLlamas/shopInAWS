@@ -62,15 +62,15 @@ resource "aws_ecs_task_definition" "APIRestSmallCompany" {
 }
 
 
-#resource "aws_ecs_service" "service_for_api" {
-#  name            = "serviceApiRest"
-#  cluster         = "${aws_ecs_cluster.api_rest_cluster.id}"
-#  task_definition = "${aws_ecs_task_definition.APIRestSmallCompany.arn}"
-#  desired_count   = 2
-##  launch_type = "FARGATE"
-#  network_configuration {
-#    subnets = ["${aws_subnet.unir_subnet_cluster_1.id}",
-#    "${aws_subnet.unir_subnet_cluster_2.id}"]
-#    security_groups = ["${aws_security_group.api_rest_group.id}"]
-#  }
-#}
+resource "aws_ecs_service" "service_for_api" {
+  name            = "serviceApiRest"
+  cluster         = "${aws_ecs_cluster.api_rest_cluster.id}"
+  task_definition = "${aws_ecs_task_definition.APIRestSmallCompany.arn}"
+  desired_count   = 2
+  launch_type = "FARGATE"
+  network_configuration {
+    subnets = ["${aws_subnet.unir_subnet_cluster_1.id}",
+    "${aws_subnet.unir_subnet_cluster_2.id}"]
+    security_groups = ["${aws_security_group.api_rest_group.id}"]
+  }
+}
