@@ -39,6 +39,9 @@
 #    value = "${aws_eks_cluster.CLUSTER.certificate_authority}"
 #}
 
+data "aws_iam_role" "ecs_task_execution_role" {
+  name = "ecsTaskExecutionRole"
+}
 
 resource "aws_ecs_task_definition" "APIRestSmallCompany" {
   family                = "APIRestSmallCompany"
@@ -50,4 +53,7 @@ resource "aws_ecs_task_definition" "APIRestSmallCompany" {
   memory = 2048
   cpu = 1024
   network_mode= "awsvpc"
+    execution_role_arn = "${data.aws_iam_role.ecs_task_execution_role.arn}"
 }
+
+
