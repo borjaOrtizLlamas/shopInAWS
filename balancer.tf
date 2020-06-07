@@ -19,6 +19,18 @@ resource "aws_lb_target_group" "targetForService" {
     Name = "targetForService-${var.SUFIX}"
     Environment = "${var.SUFIX}"
   }
-
 }
-
+#resource "aws_lb_target_group_attachment" "attachment" {
+#  target_group_arn = "${aws_lb_target_group.targetForService.arn}"
+#  target_id        = "${aws_ecs_service.service_for_api.id}"
+#  port             = 8080
+#}
+resource "aws_lb_listener" "front_end" {
+  load_balancer_arn = "${aws_lb.balancer.arn}"
+  port              = "8080"
+  protocol          = "HTTP"
+  default_action {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.targetForService.arn}"
+  }
+}
