@@ -38,3 +38,15 @@
 #output "eks_cluster_certificat_authority" {
 #    value = "${aws_eks_cluster.CLUSTER.certificate_authority}"
 #}
+
+
+resource "aws_ecs_task_definition" "APIRestSmallCompany" {
+  family                = "APIRestSmallCompany"
+  container_definitions = file("containers.json")
+  volume {
+    name      = "logs"
+  }
+  requires_compatibilities = FARGATE
+  memory = 2048
+  cpu = 1024
+}
