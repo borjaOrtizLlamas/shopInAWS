@@ -67,4 +67,10 @@ resource "aws_ecs_service" "service_for_api" {
   cluster         = "${aws_ecs_cluster.api_rest_cluster.id}"
   task_definition = "${aws_ecs_task_definition.APIRestSmallCompany.arn}"
   desired_count   = 2
+  network_configuration = {
+    subnets: ["${aws_subnet.unir_subnet_cluster_1}",
+    "${aws_subnet.unir_subnet_cluster_2}"]
+    security_groups = ["${aws_security_group.api_rest_group}"]
+
+  }
 }

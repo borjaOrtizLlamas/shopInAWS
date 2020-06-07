@@ -7,6 +7,34 @@ resource "aws_security_group" "mongo_access" {
   }
 }
 
+resource "aws_security_group" "api_rest_group" {
+  name        = "api rest group"
+  description = "Api rest security"
+  vpc_id      = "${aws_vpc.unir_shop_vpc_dev.id}"
+  tags = {
+    Name = "api rest group"
+  }
+}
+
+resource "aws_security_group_rule" "api_rest_outbound" {
+  type              = "egress"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.api_rest_group.id}"
+
+resource "aws_security_group_rule" "api_rest_ingress" {
+  type              = "ingress"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.api_rest_group.id}"
+}
+
+
+
 resource "aws_security_group_rule" "mongo_outbound" {
   type              = "egress"
   from_port         = 27017
