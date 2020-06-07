@@ -46,7 +46,7 @@ resource "aws_ecs_task_definition" "APIRestSmallCompany" {
   volume {
     name      = "logs"
   }
-  requires_compatibilities = "FARGATE"
+  requires_compatibilities = ["FARGATE"]
   memory = 2048
   cpu = 1024
 }
