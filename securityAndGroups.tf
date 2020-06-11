@@ -1,11 +1,6 @@
-resource "aws_security_group" "mongo_access" {
-  name        = "allow mongo"
-  description = "Allow mongo inbound traffic and all outbound trafic"
-  vpc_id      = "${aws_vpc.unir_shop_vpc_dev.id}"
-  tags = {
-    Name = "allow mongo"
-  }
-}
+##########
+## api_rest
+##########
 
 resource "aws_security_group" "api_rest_group" {
   name        = "api rest group"
@@ -72,8 +67,17 @@ resource "aws_security_group_rule" "get_container_https_ingress" {
 }
 
 
-
-
+##########
+## mongo
+##########
+resource "aws_security_group" "mongo_access" {
+  name        = "allow mongo"
+  description = "Allow mongo inbound traffic and all outbound trafic"
+  vpc_id      = "${aws_vpc.unir_shop_vpc_dev.id}"
+  tags = {
+    Name = "allow mongo"
+  }
+}
 
 resource "aws_security_group_rule" "mongo_outbound" {
   type              = "egress"
@@ -83,7 +87,6 @@ resource "aws_security_group_rule" "mongo_outbound" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = "${aws_security_group.mongo_access.id}"
 }
-
 resource "aws_security_group_rule" "ssh_outbound" {
   type              = "egress"
   from_port         = 22
@@ -93,8 +96,6 @@ resource "aws_security_group_rule" "ssh_outbound" {
   security_group_id = "${aws_security_group.mongo_access.id}"
 }
 
-
-#seguridad, acepta SSH
 resource "aws_security_group_rule" "ssh_rule_ingress" {
   type              = "ingress"
   from_port         = 22
@@ -112,6 +113,77 @@ resource "aws_security_group_rule" "mongo_ingress" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = "${aws_security_group.mongo_access.id}"
 }
+
+
+##########
+## kibana 
+##########
+
+resource "aws_security_group" "kibana_access" {
+  name        = "allow kibana"
+  description = "Allow kibana inbound traffic and all outbound trafic"
+  vpc_id      = "${aws_vpc.unir_shop_vpc_dev.id}"
+  tags = {
+    Name = "allow-kibana-${var.SUFIX}"
+    Environment = "${var.SUFIX}"
+  }
+}
+
+resource "aws_security_group_rule" "ssh_outbound" {
+  type              = "egress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.kibana_access.id}"
+}
+resource "aws_security_group_rule" "elastic_outbound" {
+  type              = "egress"
+  from_port         = 9200
+  to_port           = 9200
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.kibana_access.id}"
+}
+resource "aws_security_group_rule" "kibana_outbound" {
+  type              = "egress"
+  from_port         = 5601
+  to_port           = 5601
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.kibana_access.id}"
+}
+
+resource "aws_security_group_rule" "ssh_rule_ingress" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.kibana_access.id}"
+}
+
+resource "aws_security_group_rule" "elastic_outbound" {
+  type              = "ingress"
+  from_port         = 9200
+  to_port           = 9200
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.kibana_access.id}"
+}
+
+resource "aws_security_group_rule" "kibana_outbound" {
+  type              = "ingress"
+  from_port         = 5601
+  to_port           = 5601
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.kibana_access.id}"
+}
+
+###################
+
+
 
 # Setup for IAM role needed to setup an EKS cluster
 resource "aws_iam_role" "eks_cluster_role" {
