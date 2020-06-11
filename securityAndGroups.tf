@@ -163,7 +163,7 @@ resource "aws_security_group_rule" "ssh_rule_ingress" {
   security_group_id = "${aws_security_group.kibana_access.id}"
 }
 
-resource "aws_security_group_rule" "elastic_outbound" {
+resource "aws_security_group_rule" "elastic_ingress" {
   type              = "ingress"
   from_port         = 9200
   to_port           = 9200
@@ -172,7 +172,7 @@ resource "aws_security_group_rule" "elastic_outbound" {
   security_group_id = "${aws_security_group.kibana_access.id}"
 }
 
-resource "aws_security_group_rule" "kibana_outbound" {
+resource "aws_security_group_rule" "kibana_ingress" {
   type              = "ingress"
   from_port         = 5601
   to_port           = 5601
