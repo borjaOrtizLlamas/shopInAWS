@@ -21,7 +21,7 @@ resource "aws_instance" "kibana" {
   ami = "ami-0bbb90fb58907eeb3"
   instance_type = "t2.micro"
   availability_zone = "${var.ZONE_SUB}"
-  key_name = "${aws_key_pair.KIBANA_SSH_KEY.key_name}"
+  key_name = "${aws_key_pair.kibanaSSH.key_name}"
   network_interface {
     network_interface_id = "${aws_network_interface.kibana_interface.id}"
     device_index = 0
