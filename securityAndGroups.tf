@@ -129,7 +129,7 @@ resource "aws_security_group" "kibana_access" {
   }
 }
 
-resource "aws_security_group_rule" "ssh_outbound" {
+resource "aws_security_group_rule" "ssh_outbound_kibana" {
   type              = "egress"
   from_port         = 22
   to_port           = 22
@@ -154,7 +154,7 @@ resource "aws_security_group_rule" "kibana_outbound" {
   security_group_id = "${aws_security_group.kibana_access.id}"
 }
 
-resource "aws_security_group_rule" "ssh_rule_ingress" {
+resource "aws_security_group_rule" "ssh_rule_ingress_kibana" {
   type              = "ingress"
   from_port         = 22
   to_port           = 22
