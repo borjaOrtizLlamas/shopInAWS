@@ -19,7 +19,7 @@ resource "aws_instance" "mongoDB_des" {
 
 resource "aws_instance" "kibana" {
   ami = "ami-0bbb90fb58907eeb3"
-  instance_type = "t2.micro"
+  instance_type = "t2.medium"
   availability_zone = "${var.ZONE_SUB}"
   key_name = "${aws_key_pair.kibanaSSH.key_name}"
   network_interface {
