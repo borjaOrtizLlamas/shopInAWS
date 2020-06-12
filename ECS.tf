@@ -13,8 +13,8 @@ resource "aws_ecs_task_definition" "APIRestSmallCompany" {
         name      = "logs"
     }
     requires_compatibilities = ["FARGATE"]
-    memory = 2048
-    cpu = 1024
+    memory = 1024
+    cpu = 512
     network_mode= "awsvpc"
     execution_role_arn = "${data.aws_iam_role.ecs_task_execution_role.arn}"
 }
