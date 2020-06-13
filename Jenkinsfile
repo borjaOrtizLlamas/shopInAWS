@@ -3,9 +3,6 @@ def variablesDef = null
 pipeline {
     agent any
     
-    environment {
-    }
-
 	stages {
         stage('download proyect and variables - dev') {
             steps {
