@@ -4,13 +4,14 @@ pipeline {
     agent any
     
     environment {
-        variablesurl = ''
     }
 
 	stages {
         stage('download proyect and variables - dev') {
             steps {
-                git credentialsId: 'github_credential', url: 'https://github.com/borjaOrtizLlamas/shop_infraestucture_generator_vars.git'
+                dir('envs') {
+                    git credentialsId: 'github_credential', url: 'https://github.com/borjaOrtizLlamas/shop_infraestucture_generator_vars.git'
+                }
             }
         }
         stage('Approve build') {
@@ -21,7 +22,7 @@ pipeline {
                     } else {
                         variablesDef = 'master'
                     }
-                    sh "export TF_LOG=DEBUG  && terraform init && terraform refresh -var-file=\"variables_${variablesDef}.tfvars\" && terraform plan -var-file=\"variables_${variablesDef}.tfvars\""
+                    sh "export TF_LOG=DEBUG  && terraform init && terraform refresh -var-file=\"envs/variables_${variablesDef}.tfvars\" && terraform plan -var-file=\"envs/variables_${variablesDef}.tfvars\""
                     input(message : 'do you want to deploy this build to dev?')
                 }
             }
@@ -29,7 +30,7 @@ pipeline {
 
         stage('development enviorment execute') {
             steps {
-                sh "export TF_LOG=DEBUG &&  terraform apply -input=false -auto-approve  -var-file=\"variables_${variablesDef}.tfvars\""
+                sh "export TF_LOG=DEBUG &&  terraform apply -input=false -auto-approve  -var-file=\"envs/variables_${variablesDef}.tfvars\""
             }
         }
 
