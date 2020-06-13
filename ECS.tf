@@ -8,7 +8,7 @@ data "aws_iam_role" "ecs_task_execution_role" {
 
 resource "aws_ecs_task_definition" "APIRestSmallCompany" {
     family = "APIRestSmallCompany"
-    #container_definitions = file("containers.json") #funciona
+    container_definitions = file("containers.json") #funciona
     volume {
         name      = "logs"
     }
