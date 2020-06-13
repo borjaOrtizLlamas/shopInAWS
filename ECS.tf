@@ -8,7 +8,7 @@ data "aws_iam_role" "ecs_task_execution_role" {
 
 resource "aws_ecs_task_definition" "APIRestSmallCompany" {
     family = "APIRestSmallCompany"
-    container_definitions = file("containers.json") #funciona
+    #container_definitions = file("containers.json") #funciona
     volume {
         name      = "logs"
     }
@@ -31,6 +31,7 @@ resource "aws_ecs_service" "service_for_api" {
     security_groups = ["${aws_security_group.api_rest_group.id}"]
     assign_public_ip = true
   }
+  depends_on = ["aws_lb_target_group.targetForService"]
   load_balancer {
     target_group_arn = "${aws_lb_target_group.targetForService.arn}"
     container_name   = "smallComerceApiRest"
