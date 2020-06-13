@@ -15,9 +15,9 @@ pipeline {
             steps {
                 script {
                     if (env.BRANCH_NAME != 'master') {
-                        variablesurl = 'develop'
+                        env.variablesurl = 'develop'
                     } else {
-                        variablesurl = 'master'
+                        env.variablesurl = 'master'
                     }
                     sh "export TF_LOG=DEBUG  && terraform init && terraform refresh -var-file=\"variables_${env.variablesurl}.tfvars\" && terraform plan -var-file=\"variables_${env.variablesurl}.tfvars\""
                     input(message : 'do you want to deploy this build to dev?')
