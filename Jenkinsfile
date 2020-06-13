@@ -1,78 +1,35 @@
 pipeline {
     agent any
+    
+    environment {
+        variablesurl = ''
+    }
+
 	stages {
         stage('download proyect and variables - dev') {
             steps {
-                dir('shop-proyect-dev') {
-                   git credentialsId: 'github_credential', url: 'https://github.com/borjaOrtizLlamas/shop_infraestucture_generator_vars.git'
-                }
+                git credentialsId: 'github_credential', url: 'https://github.com/borjaOrtizLlamas/shop_infraestucture_generator_vars.git'
             }
         }
-        stage('Approve build in dev') {
+        stage('Approve build') {
             steps {
-                dir('shop-proyect-dev') {
-                    sh "cp ../*.tf ./ && cp ../*.json ./"
-                    sh "export TF_LOG=DEBUG  && terraform init && terraform refresh -var-file=\"variables_dev.tfvars\" && terraform plan -var-file=\"variables_dev.tfvars\""
+                script {
+                    if (env.BRANCH_NAME != 'master') {
+                        variablesurl = 'develop'
+                    } else {
+                        variablesurl = 'master'
+                    }
+                    sh "export TF_LOG=DEBUG  && terraform init && terraform refresh -var-file=\"variables_${env.variablesurl}.tfvars\" && terraform plan -var-file=\"variables_${env.variablesurl}.tfvars\""
+                    input(message : 'do you want to deploy this build to dev?')
                 }
-                input(message : 'do you want to deploy this build to dev?')
             }
         }
 
         stage('development enviorment execute') {
             steps {
-                dir('shop-proyect-dev') {
-                    sh "export TF_LOG=DEBUG &&  terraform apply -input=false -auto-approve  -var-file=\"variables_dev.tfvars\""
-                }
+                sh "export TF_LOG=DEBUG &&  terraform apply -input=false -auto-approve  -var-file=\"variables_${env.variablesurl}.tfvars\""
             }
         }
 
-
-        stage('download proyect and variables - PRO') {
-            steps {
-                script {
-                    if (env.BRANCH_NAME != 'master') {
-                        error('Not the branch to deploy in pro')
-                   } else  {
-                        dir('shop-proyect-pro') {
-                            git credentialsId: 'github_credential', url: 'https://github.com/borjaOrtizLlamas/shop_infraestucture_generator_vars.git'
-                        }
-                   }                        
-                }
-                
-            } 
-        }
-        
-        
-        stage('Approve build in production') {
-            steps {
-                script {
-                    if (env.BRANCH_NAME != 'master') {
-                       error('Not the branch to deploy in pro')
-                   } else  {
-                        dir('shop-proyect-pro') {
-                            sh "cp ../*.tf ./ && cp ../*.json ./"
-                            sh "export TF_LOG=DEBUG && terraform init  && terraform refresh -var-file=\"variables_pro.tfvars\" && terraform plan -var-file=\"variables_pro.tfvars\""
-                            input(message : 'do you want to deploy this build to production?')
-                        }
-                   }
-                }
-            }
-        }
-
-        stage('PRODUCTION enviorment execute') {
-            steps {
-                script {
-                    if (env.BRANCH_NAME != 'master') {
-                       currentBuild.result = 'SUCCESS'
-                       error('Not the branch to deploy in pro')
-
-                   } else  {
-                        dir('shop-proyect-pro') {
-                            sh "export TF_LOG=DEBUG && terraform apply -input=false -auto-approve  -var-file=\"variables_pro.tfvars\""
-                        }
-                   }
-                }
-            }
-        }
    }
 }
