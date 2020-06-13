@@ -1,4 +1,4 @@
-def variablesDef = "develop"
+def variablesDef = null
 
 pipeline {
     agent any
