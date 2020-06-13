@@ -1,3 +1,5 @@
+def variablesDef = "develop"
+
 pipeline {
     agent any
     
@@ -19,7 +21,7 @@ pipeline {
                     } else {
                         env.variablesurl = 'master'
                     }
-                    sh "export TF_LOG=DEBUG  && terraform init && terraform refresh -var-file=\"variables_${env.variablesurl}.tfvars\" && terraform plan -var-file=\"variables_${env.variablesurl}.tfvars\""
+                    sh "export TF_LOG=DEBUG  && terraform init && terraform refresh -var-file=\"variables_${variablesDef}.tfvars\" && terraform plan -var-file=\"variables_${variablesDef}.tfvars\""
                     input(message : 'do you want to deploy this build to dev?')
                 }
             }
@@ -27,7 +29,7 @@ pipeline {
 
         stage('development enviorment execute') {
             steps {
-                sh "export TF_LOG=DEBUG &&  terraform apply -input=false -auto-approve  -var-file=\"variables_${env.variablesurl}.tfvars\""
+                sh "export TF_LOG=DEBUG &&  terraform apply -input=false -auto-approve  -var-file=\"variables_${variablesDef}.tfvars\""
             }
         }
 
