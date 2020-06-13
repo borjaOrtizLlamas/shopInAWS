@@ -7,10 +7,10 @@ data "aws_iam_role" "ecs_task_execution_role" {
 }
 
 resource "aws_ecs_task_definition" "APIRestSmallCompany" {
-    family = "APIRestSmallCompany"
+    family = "APIRestSmallCompany-${var.SUFIX}"
     container_definitions = file("containers.json") #funciona
     volume {
-        name      = "logs"
+        name      = "logs-${var.SUFIX}"
     }
     requires_compatibilities = ["FARGATE"]
     memory = 1024
@@ -20,7 +20,7 @@ resource "aws_ecs_task_definition" "APIRestSmallCompany" {
 }
 
 resource "aws_ecs_service" "service_for_api" {
-  name            = "serviceApiRest"
+  name            = "serviceApiRest-${var.SUFIX}"
   cluster         = "${aws_ecs_cluster.api_rest_cluster.id}"
   task_definition = "${aws_ecs_task_definition.APIRestSmallCompany.arn}"
   desired_count   = 2
