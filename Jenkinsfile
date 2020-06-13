@@ -25,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('development enviorment execute') {
+        stage('enviorment execute') {
             steps {
                 sh "export TF_LOG=DEBUG &&  terraform apply -input=false -auto-approve  -var-file=\"envs/variables_${variablesDef}.tfvars\""
             }
