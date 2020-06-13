@@ -38,7 +38,7 @@ pipeline {
         
         stage('Approve build in production') {
             steps {
-                if ($branch != 'master') {
+                if (env.BRANCH_NAME != 'master') {
                     currentBuild.result = 'ABORTED'
                 }
                 dir('shop-proyect-pro') {
