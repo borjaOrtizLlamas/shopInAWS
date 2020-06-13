@@ -38,6 +38,10 @@ pipeline {
         
         stage('Approve build in production') {
             steps {
+                if ($branch != 'master') {
+                    currentBuild.result = 'ABORTED'
+                    error('Stopping early…')
+                }
                 dir('shop-proyect-pro') {
                     sh "cp ../*.tf ./ && cp ../*.json ./"
                     sh "export TF_LOG=DEBUG && terraform init  && terraform refresh -var-file=\"variables_pro.tfvars\" && terraform plan -var-file=\"variables_pro.tfvars\""
