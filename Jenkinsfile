@@ -3,9 +3,9 @@ pipeline {
 	stages {
         stage('download proyect and variables - dev') {
             steps {
-                 dir('shop-proyect-dev') {
-                    git credentialsId: 'github_credential', url: 'https://github.com/borjaOrtizLlamas/shop_infraestucture_generator_vars.git'
-                 }
+                dir('shop-proyect-dev') {
+                   git credentialsId: 'github_credential', url: 'https://github.com/borjaOrtizLlamas/shop_infraestucture_generator_vars.git'
+                }
             }
         }
         stage('Approve build in dev') {
@@ -38,13 +38,9 @@ pipeline {
         
         stage('Approve build in production') {
             steps {
-                if (CURRENT_BRANCH != 'master') {
-                    currentBuild.result = 'ABORTED'
-                    error('you need to use master branch to deploy in production')
-                }
                 dir('shop-proyect-pro') {
                     sh "cp ../*.tf ./ && cp ../*.json ./"
-                    sh "export TF_LOG=DEBUG && terraform init  && terraform refresh -var-file=\"../variables_pro.tfvars\" && terraform plan -var-file=\"../variables_pro.tfvars\""
+                    sh "export TF_LOG=DEBUG && terraform init  && terraform refresh -var-file=\"variables_pro.tfvars\" && terraform plan -var-file=\"variables_pro.tfvars\""
                     input(message : 'do you want to deploy this build to production?')
                 }
             }        
@@ -53,7 +49,7 @@ pipeline {
         stage('PRODUCTION enviorment execute') {
             steps {
                 dir('shop-proyect-pro') {
-                    sh "export TF_LOG=DEBUG  &&  terraform apply -input=false -auto-approve  -var-file=\"../variables_pro.tfvars\""
+                    sh "export TF_LOG=DEBUG && terraform apply -input=false -auto-approve  -var-file=\"variables_pro.tfvars\""
                 }
             }
         }
