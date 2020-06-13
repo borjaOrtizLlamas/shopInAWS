@@ -38,10 +38,11 @@ pipeline {
         
         stage('Approve build in production') {
             steps {
-                if (env.BRANCH_NAME != 'master') {
-                    currentBuild.result = 'ABORTED'
-                }
                 dir('shop-proyect-pro') {
+                    if (env.BRANCH_NAME != 'master') {
+                        currentBuild.result = 'ABORTED'
+                    }
+
                     sh "cp ../*.tf ./ && cp ../*.json ./"
                     sh "export TF_LOG=DEBUG && terraform init  && terraform refresh -var-file=\"variables_pro.tfvars\" && terraform plan -var-file=\"variables_pro.tfvars\""
                     input(message : 'do you want to deploy this build to production?')
