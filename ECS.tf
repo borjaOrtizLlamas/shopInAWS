@@ -10,7 +10,7 @@ resource "aws_ecs_task_definition" "APIRestSmallCompany" {
     family = "APIRestSmallCompany-${var.SUFIX}"
     container_definitions = file("containers.json") #funciona
     volume {
-        name      = "logs-${var.SUFIX}"
+        name      = "logs"
     }
     requires_compatibilities = ["FARGATE"]
     memory = 1024
