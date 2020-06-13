@@ -23,7 +23,7 @@ resource "aws_subnet" "unir_subnet_aplications" {
   cidr_block = "${var.SUBNET_CIDR_APLICATIONS}"
   availability_zone = "${var.ZONE_SUB}"
   depends_on = ["aws_internet_gateway.unir_gat_shop"]
-  map_public_ip_on_launch = true
+#  map_public_ip_on_launch = true
   tags = {
     Name = "UNIR-SUBNET-APLICATIONS-${var.SUFIX}"
     Environment = "${var.SUFIX}"
