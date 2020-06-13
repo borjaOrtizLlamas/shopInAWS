@@ -31,8 +31,7 @@ pipeline {
             steps {
                 script {
                     if (env.BRANCH_NAME != 'master') {
-                        currentBuild.result = 'ABORTED'
-
+                        error('Not the branch to deploy in pro')
                    } else  {
                         dir('shop-proyect-pro') {
                             git credentialsId: 'github_credential', url: 'https://github.com/borjaOrtizLlamas/shop_infraestucture_generator_vars.git'
@@ -48,7 +47,7 @@ pipeline {
             steps {
                 script {
                     if (env.BRANCH_NAME != 'master') {
-                        currentBuild.result = 'ABORTED'
+                       error('Not the branch to deploy in pro')
                    } else  {
                         dir('shop-proyect-pro') {
                             sh "cp ../*.tf ./ && cp ../*.json ./"
@@ -64,7 +63,9 @@ pipeline {
             steps {
                 script {
                     if (env.BRANCH_NAME != 'master') {
-                        currentBuild.result = 'ABORTED'
+                       currentBuild.result = 'SUCCESS'
+                       error('Not the branch to deploy in pro')
+
                    } else  {
                         dir('shop-proyect-pro') {
                             sh "export TF_LOG=DEBUG && terraform apply -input=false -auto-approve  -var-file=\"variables_pro.tfvars\""
