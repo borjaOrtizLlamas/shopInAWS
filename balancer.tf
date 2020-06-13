@@ -10,7 +10,7 @@ resource "aws_lb" "balancer" {
 }
 
 resource "aws_lb_target_group" "targetForService" {
-  name     = "targetForService"
+  name     = "targetForService-${var.SUFIX}"
   port     = 8080
   protocol = "HTTP"
   vpc_id   = "${aws_vpc.unir_shop_vpc_dev.id}"
