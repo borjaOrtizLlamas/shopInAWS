@@ -38,7 +38,6 @@ resource "aws_instance" "kibana" {
 
 resource "aws_network_interface" "mongo_interface" {
     subnet_id   = "${aws_subnet.unir_subnet_aplications.id}"
-    private_ip = "172.10.0.5"
     security_groups = ["${aws_security_group.mongo_access.id}"]
     tags = {
         Name = "unir_mongo_interface-${var.SUFIX}"
