@@ -1,5 +1,5 @@
 resource "aws_instance" "mongoDB_des" {
-  ami = "ami-0bbb90fb58907eeb3" 
+  ami = "ami-03163cb22861af208" 
   instance_type = "t2.micro"
   availability_zone = "${var.ZONE_SUB}"
   key_name = "${aws_key_pair.mongoSSH.key_name}"
@@ -18,7 +18,7 @@ resource "aws_instance" "mongoDB_des" {
 
 
 resource "aws_instance" "kibana" {
-  ami = "ami-0bbb90fb58907eeb3"
+  ami = "ami-058ae122ae9c2456e"
   instance_type = "t2.medium"
   availability_zone = "${var.ZONE_SUB}"
   key_name = "${aws_key_pair.kibanaSSH.key_name}"
