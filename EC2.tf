@@ -3,7 +3,7 @@ resource "aws_instance" "mongoDB_des" {
   instance_type = "t2.micro"
   availability_zone = "${var.ZONE_SUB}"
   key_name = "${aws_key_pair.mongoSSH.key_name}"
-  private_ip = "172.10.0.5"
+
   network_interface {
     network_interface_id = "${aws_network_interface.mongo_interface.id}"
     device_index = 0
