@@ -1,5 +1,5 @@
 resource "aws_instance" "mongoDB_des" {
-  ami = "ami-03163cb22861af208" 
+  ami = "ami-01b128ace52c782a0" 
   instance_type = "t2.micro"
   availability_zone = "${var.ZONE_SUB}"
   key_name = "${aws_key_pair.mongoSSH.key_name}"
