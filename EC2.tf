@@ -1,4 +1,4 @@
-resource "aws_instance" "mongoDB_des" {
+resource "aws_instance" "mongoDB" {
   ami = "ami-01b128ace52c782a0" 
   instance_type = "t2.micro"
   availability_zone = "${var.ZONE_SUB}"
@@ -55,4 +55,13 @@ resource "aws_network_interface" "kibana_interface" {
 }
 
 
-
+resource "aws_eip" "mongoEIP" {
+  depends_on = ["aws_internet_gateway.openWorld"]
+  vpc = true
+  instance = "${aws_instance.mongoDB.id}"
+}
+resource "aws_eip" "kibanaEIP" {
+  depends_on = ["aws_internet_gateway.openWorld"]
+  vpc = true
+  instance = "${aws_instance.kibana.id}"
+}
