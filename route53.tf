@@ -7,7 +7,7 @@ resource "aws_route53_zone" "dns-private" {
 }
 
 
-resource "aws_route53_record" "www" {
+resource "aws_route53_record" "mongo-record" {
   zone_id = "${aws_route53_zone.dns-private.zone_id}"
   name    = "mongo.${var.SUFIX}.tfm.com"
   type    = "A"
@@ -15,7 +15,7 @@ resource "aws_route53_record" "www" {
   records = ["${aws_eip.mongoEIP.private_ip}"]
 }
 
-resource "aws_route53_record" "www" {
+resource "aws_route53_record" "kibana-record" {
   zone_id = "${aws_route53_zone.dns-private.zone_id}"
   name    = "kibana.${var.SUFIX}.tfm.com"
   type    = "A"
