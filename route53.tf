@@ -12,6 +12,7 @@ resource "aws_route53_record" "mongo-record" {
   name    = "mongo.${var.SUFIX}.tfm.com"
   type    = "A"
   ttl     = "300"
+    depends_on = ["aws_eip.mongoEIP"]
   records = ["${aws_eip.mongoEIP.private_ip}"]
 }
 
@@ -20,7 +21,6 @@ resource "aws_route53_record" "kibana-record" {
   name    = "kibana.${var.SUFIX}.tfm.com"
   type    = "A"
   ttl     = "300"
-  depends_on = ["aws_eip.mongoEIP"]
-
-  records = ["${aws_eip.mongoEIP.private_ip}"]
+  depends_on = ["aws_eip.kibanaEIP"]
+  records = ["${aws_eip.kibanaEIP.private_ip}"]
 }
