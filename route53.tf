@@ -6,7 +6,6 @@ resource "aws_route53_zone" "dns-private" {
   }
 }
 
-
 resource "aws_route53_record" "mongo-record" {
   zone_id = "${aws_route53_zone.dns-private.zone_id}"
   name    = "mongo.tfm.com"
