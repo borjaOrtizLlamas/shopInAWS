@@ -19,7 +19,7 @@ pipeline {
                     } else {
                         variablesDef = 'master'
                     }
-                    sh "export TF_LOG=DEBUG  && terraform init && terraform refresh -var-file=\"envs/variables_${variablesDef}.tfvars\" && terraform plan -auto-approve -var-file=\"envs/variables_${variablesDef}.tfvars\""
+                    sh "export TF_LOG=DEBUG  && terraform init && terraform refresh -var-file=\"envs/variables_${variablesDef}.tfvars\" && terraform plan  -var-file=\"envs/variables_${variablesDef}.tfvars\""
                     input(message : 'do you want to deploy this build to dev?')
                 }
             }
