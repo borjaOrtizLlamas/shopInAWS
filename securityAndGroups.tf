@@ -66,6 +66,24 @@ resource "aws_security_group_rule" "get_container_https_ingress" {
   security_group_id = "${aws_security_group.api_rest_group.id}"
 }
 
+resource "aws_security_group_rule" "access-mongo" {
+  type              = "ingress"
+  from_port         = 27017
+  to_port           = 27017
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.api_rest_group.id}"
+}
+
+resource "aws_security_group_rule" "out-mongo" {
+  type              = "egress"
+  from_port         = 27017
+  to_port           = 27017
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.api_rest_group.id}"
+}
+
 
 ##########
 ## mongo
