@@ -1,5 +1,5 @@
 resource "aws_ecs_cluster" "api_rest_cluster" {
-  name = "api_rest_cluster"
+  name = "api_rest_cluster-${var.SUFIX}"
 }
 
 data "aws_iam_role" "ecs_task_execution_role" {
