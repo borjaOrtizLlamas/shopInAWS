@@ -3,7 +3,7 @@ resource "aws_ecs_cluster" "api_rest_cluster" {
 }
 
 data "aws_iam_role" "ecs_task_execution_role" {
-  name = "ecsTaskExecutionRole1"
+  name = "ecsTaskExecutionRole2"
 }
 
 resource "aws_ecs_task_definition" "APIRestSmallCompany" {
