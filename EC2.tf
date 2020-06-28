@@ -55,13 +55,13 @@ resource "aws_network_interface" "kibana_interface" {
 }
 
 
-resource "aws_eip" "mongoEIP" {
-  depends_on = ["aws_internet_gateway.unir_gat_shop"]
-  vpc = true
-  instance = "${aws_instance.mongoDB.id}"
-}
-resource "aws_eip" "kibanaEIP" {
-  depends_on = ["aws_internet_gateway.unir_gat_shop"]
-  vpc = true
-  instance = "${aws_instance.kibana.id}"
-}
+#resource "aws_eip" "mongoEIP" {
+#  depends_on = ["aws_internet_gateway.unir_gat_shop"]
+#  vpc = true
+#  instance = "${aws_instance.mongoDB.id}"
+#}
+#resource "aws_eip" "kibanaEIP" {
+#  depends_on = ["aws_internet_gateway.unir_gat_shop"]
+#  vpc = true
+#  instance = "${aws_instance.kibana.id}"
+#}
