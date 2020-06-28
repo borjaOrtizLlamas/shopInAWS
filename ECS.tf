@@ -29,7 +29,7 @@ resource "aws_ecs_service" "service_for_api" {
     subnets = ["${aws_subnet.unir_subnet_cluster_1.id}",
     "${aws_subnet.unir_subnet_cluster_2.id}"]
     security_groups = ["${aws_security_group.api_rest_group.id}"]
-    assign_public_ip = true
+    assign_public_ip = false
   }
   depends_on = ["aws_lb_target_group.targetForService"]
   load_balancer {
