@@ -2,7 +2,8 @@ resource "aws_lb" "balancer" {
   name  = "APIRestBalancer-${var.SUFIX}"
   security_groups    = ["${aws_security_group.api_rest_group.id}"]
   subnets = ["${aws_subnet.unir_subnet_cluster_1.id}",
-             "${aws_subnet.unir_subnet_cluster_2.id}"]
+             "${aws_subnet.unir_subnet_cluster_2.id}",
+             "${aws_subnet.unir_subnet_aplications.id}"]
   tags = {
     Environment = "${var.SUFIX}"
     Name = "api-rest_balancer-${var.SUFIX}"
@@ -56,4 +57,10 @@ resource "aws_lb_listener" "kibana_front_end" {
     type             = "forward"
     target_group_arn = "${aws_lb_target_group.kibana.arn}"
   }
+}
+
+resource "aws_lb_target_group_attachment" "kibana_attachment" {
+  target_group_arn = "${aws_lb_target_group.kibana.arn}"
+  target_id        = "${aws_instance.kibana.id}"
+  port             = 5601
 }
