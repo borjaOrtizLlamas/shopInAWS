@@ -31,3 +31,28 @@ resource "aws_lb_listener" "front_end" {
     target_group_arn = "${aws_lb_target_group.targetForService.arn}"
   }
 }
+
+
+
+resource "aws_lb_target_group" "kibana" {
+  name     = "kibanaGroup-${var.SUFIX}"
+  port     = 5601
+  protocol = "HTTP"
+  vpc_id   = "${aws_vpc.unir_shop_vpc_dev.id}"
+
+  tags = {
+    Name = "targetkibanaGroup-${var.SUFIX}"
+    Environment = "${var.SUFIX}"
+  }
+}
+
+
+resource "aws_lb_listener" "kibana_front_end" {
+  load_balancer_arn = "${aws_lb.balancer.arn}"
+  port              = "5601"
+  protocol          = "HTTP"
+  default_action {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.kibana.arn}"
+  }
+}
