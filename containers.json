@@ -20,9 +20,9 @@
         "containerPath": "/var/log/",
         "sourceVolume": "logs"
     }],
-    "image": "005269061637.dkr.ecr.eu-west-1.amazonaws.com/small_comerce_api_rest:latest",
+    "image": "005269061637.dkr.ecr.eu-west-1.amazonaws.com/filebeats_unir:latest",
     "essential": true,
-    "name": "smallComerceApiRest",
+    "name": "filebeatsUnir",
     "cpu": 0
 }
 ]
