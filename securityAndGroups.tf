@@ -199,6 +199,22 @@ resource "aws_security_group_rule" "kibana_ingress" {
   security_group_id = "${aws_security_group.kibana_access.id}"
 }
 
+
+resource "aws_security_group_rule" "logstash_ingress" {
+  type              = "ingress"
+  from_port         = 5044
+  to_port           = 5044
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.kibana_access.id}"
+}
+
+
+
+
+
+
+
 ###################
 
 
