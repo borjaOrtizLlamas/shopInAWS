@@ -210,15 +210,7 @@ resource "aws_security_group_rule" "logstash_ingress" {
 }
 
 
-
-
-
-
-
 ###################
-
-
-
 # Setup for IAM role needed to setup an EKS cluster
 resource "aws_iam_role" "eks_cluster_role" {
   name = "eks-cluster-${var.SUFIX}"

@@ -13,4 +13,16 @@
     "essential": true,
     "name": "smallComerceApiRest",
     "cpu": 0
-}]
+}, 
+{
+    "mountPoints": [{
+        "readOnly": false,
+        "containerPath": "/var/log/",
+        "sourceVolume": "logs"
+    }],
+    "image": "005269061637.dkr.ecr.eu-west-1.amazonaws.com/small_comerce_api_rest:latest",
+    "essential": true,
+    "name": "smallComerceApiRest",
+    "cpu": 0
+}
+]
