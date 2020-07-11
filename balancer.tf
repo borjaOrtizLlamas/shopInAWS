@@ -39,6 +39,7 @@ resource "aws_lb_target_group" "kibana" {
   port     = 5601
   protocol = "HTTP"
   vpc_id   = "${aws_vpc.unir_shop_vpc_dev.id}"
+  depends_on = ["aws_lb.balancer"]
 
   tags = {
     Name = "targetkibanaGroup-${var.SUFIX}"
