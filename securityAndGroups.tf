@@ -10,105 +10,24 @@ resource "aws_security_group" "api_rest_group" {
     Name = "api rest group"
   }
 }
-resource "aws_security_group_rule" "logs_output" {
+resource "aws_security_group_rule" "eggress_group" {
   type              = "egress"
-  from_port         = 5044
-  to_port           = 5044
+  from_port         = 0
+  to_port           = 49151
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = "${aws_security_group.api_rest_group.id}"
 }
 
-resource "aws_security_group_rule" "api_rest_outbound" {
-  type              = "egress"
-  from_port         = 8080
-  to_port           = 8080
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = "${aws_security_group.api_rest_group.id}"
-}
-
-resource "aws_security_group_rule" "api_rest_ingress" {
+resource "aws_security_group_rule" "ingress_group" {
   type              = "ingress"
-  from_port         = 8080
-  to_port           = 8080
+  from_port         = 0
+  to_port           = 49151
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = "${aws_security_group.api_rest_group.id}"
 }
 
-
-resource "aws_security_group_rule" "get_container_egress" {
-  type              = "egress"
-  from_port         = 80
-  to_port           = 80
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = "${aws_security_group.api_rest_group.id}"
-}
-
-resource "aws_security_group_rule" "get_container_ingress" {
-  type              = "ingress"
-  from_port         = 80
-  to_port           = 80
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = "${aws_security_group.api_rest_group.id}"
-}
-
-resource "aws_security_group_rule" "get_container_https_egress" {
-  type              = "egress"
-  from_port         = 443
-  to_port           = 443
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = "${aws_security_group.api_rest_group.id}"
-}
-
-resource "aws_security_group_rule" "get_container_https_ingress" {
-  type              = "ingress"
-  from_port         = 443
-  to_port           = 443
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = "${aws_security_group.api_rest_group.id}"
-}
-
-resource "aws_security_group_rule" "access-mongo" {
-  type              = "ingress"
-  from_port         = 27017
-  to_port           = 27017
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = "${aws_security_group.api_rest_group.id}"
-}
-
-resource "aws_security_group_rule" "out-mongo" {
-  type              = "egress"
-  from_port         = 27017
-  to_port           = 27017
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = "${aws_security_group.api_rest_group.id}"
-}
-
-resource "aws_security_group_rule" "out-kibana" {
-  type              = "egress"
-  from_port         = 5601
-  to_port           = 5601
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = "${aws_security_group.api_rest_group.id}"
-}
-
-resource "aws_security_group_rule" "access-kibana" {
-  type              = "ingress"
-  from_port         = 5601
-  to_port           = 5601
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = "${aws_security_group.api_rest_group.id}"
-}
 
 
 
