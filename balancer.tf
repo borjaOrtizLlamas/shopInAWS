@@ -17,7 +17,9 @@ resource "aws_lb_target_group" "targetForService" {
   vpc_id   = "${aws_vpc.unir_shop_vpc_dev.id}"
   target_type = "ip"
   depends_on = ["aws_lb.balancer"]
-
+  health_check = {
+    enabled = false
+  }
   tags = {
     Name = "targetForService-${var.SUFIX}"
     Environment = "${var.SUFIX}"
