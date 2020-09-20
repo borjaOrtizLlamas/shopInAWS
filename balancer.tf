@@ -18,8 +18,13 @@ resource "aws_lb_target_group" "targetForService" {
   target_type = "ip"
   depends_on = ["aws_lb.balancer"]
   health_check {
-    enabled = false
-    matcher = "200-399"
+    path = "/healtcheck"
+    healthy_threshold = 6
+    unhealthy_threshold = 2
+    timeout = 5
+    enabled = true
+    matcher = "200"
+    port = 8080
   }
   tags = {
     Name = "targetForService-${var.SUFIX}"
