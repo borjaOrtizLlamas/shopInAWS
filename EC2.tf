@@ -28,7 +28,7 @@ resource "aws_instance" "kibana" {
     device_index = 0
   }
   tags = {
-    Name = "kibana-${var.SUFIX}"
+    Name = "kibana-prueba-${var.SUFIX}"
     Environment = "${var.SUFIX}"
   }
   credit_specification {
